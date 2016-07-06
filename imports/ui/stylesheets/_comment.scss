@@ -1,0 +1,23 @@
+.comment-section {
+  .sideContent {
+    float: left;
+    display: inline-block;
+    width: 130px;
+    margin: 20px 20px 0 10px;
+  }
+  .social-container {
+    display: block;
+  }
+  .comment-list {
+    display: block;
+    float: left;
+  }
+}
+.sideContent {
+  .daily-secret {
+    display: block;
+  }
+  .more-secrets {
+    display: block;
+  }
+}

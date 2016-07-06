@@ -1,0 +1,86 @@
+{
+  "name": "scrtly",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "browser": {
+    "vegas": "node_modules/vegas/dist/vegas.js"
+  },
+  "dependencies": {
+    "apollo-client": "^0.3.13",
+    "apollo-server": "^0.1.3",
+    "dialog-polyfill": "^0.4.3",
+    "express": "^4.13.4",
+    "graphql": "^0.6.0",
+    "graphql-tools": "^0.6.0",
+    "http-proxy-middleware": "^0.15.2",
+    "invariant": "^2.2.1",
+    "jquery": "^3.0.0",
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.1.0",
+    "react-addons-pure-render-mixin": "^15.1.0",
+    "react-apollo": "^0.3.8",
+    "react-dom": "^15.1.0",
+    "react-mounter": "^1.2.0",
+    "tracker-component": "^1.3.21",
+    "vegas": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.0",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-import-resolver-meteor": "^0.2.3",
+    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-meteor": "^3.6.0",
+    "eslint-plugin-react": "^5.2.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "settings": {
+      "import/resolver": "meteor",
+      "react": {
+        "pragma": "React",
+        "version": "15.0"
+      }
+    },
+    "plugins": [
+      "meteor",
+      "react"
+    ],
+    "extends": [
+      "airbnb/base",
+      "plugin:meteor/recommended"
+    ],
+    "rules": {
+      "react/jsx-uses-react": "error",
+      "react/jsx-uses-vars": "error",
+      "meteor/eventmap-params": [
+        2,
+        {
+          "eventParamName": "event",
+          "templateInstanceParamName": "instance"
+        }
+      ],
+      "meteor/template-names": [
+        0
+      ]
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    }
+  }
+}
