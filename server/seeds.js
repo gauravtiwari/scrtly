@@ -1,11 +1,11 @@
 /* eslint no-console: 0 */
 
-import { Posts } from '../imports/server/collections/posts';
-import { Comments } from '../imports/server/collections/comments';
-import { Words } from '../imports/server/collections/words';
+import { Posts } from '../imports/api/collections/posts';
+import { Comments } from '../imports/api/collections/comments';
+import { Words } from '../imports/api/collections/words';
 
-import WordsSeed from '../imports/server/fixtures/words';
-import PostsSeed from '../imports/server/fixtures/posts';
+import WordsSeed from '../imports/api/fixtures/words';
+import PostsSeed from '../imports/api/fixtures/posts';
 
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
