@@ -1,23 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import { render } from 'react-dom';
-import React from 'react';
+import { mount } from 'react-mounter';
 
 require('vegas');
 import 'vegas/dist/vegas.css';
 
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
-import { ApolloProvider } from 'react-apollo';
-
-import App from '../imports/ui/App';
-
-const networkInterface = createNetworkInterface('/graphql');
-
-const client = new ApolloClient({
-  networkInterface,
-});
-
+import AppContainer from '../imports/ui/App.jsx';
 Meteor.startup(() => {
-  render(<ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>, document.getElementById('app'));
+  mount(AppContainer);
 });
