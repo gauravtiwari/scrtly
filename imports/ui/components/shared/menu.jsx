@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
+// Menu Component
 class Menu extends Component {
   constructor(props) {
     super(props);

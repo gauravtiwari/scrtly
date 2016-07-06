@@ -1,9 +1,9 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
 /* eslint no-underscore-dangle: 0 */
 
-import { Posts } from '../server/collections/posts';
-import { Comments } from '../server/collections/comments';
-import { Words } from '../server/collections/words';
+import { Posts } from './collections/posts.js';
+import { Comments } from './collections/comments.js';
+import { Words } from './collections/words.js';
 
 export const schema = [`
 type Word {

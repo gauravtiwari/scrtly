@@ -1,48 +1,18 @@
 import React, { Component } from 'react';
-import dialogPolyfill from 'dialog-polyfill';
+import Dialog from '../utils/dialog.js';
 import 'dialog-polyfill/dialog-polyfill.css';
 
 class Slogan extends Component {
   constructor(props) {
     super(props);
-    this.toggleShareModal = this.toggleShareModal.bind(this);
-    this.shareDialog = this.shareDialog.bind(this);
-    this.closeDialog = this.closeDialog.bind(this);
-    this.responseDialog = this.responseDialog.bind(this);
+    this.dialog = new Dialog;
   }
 
   componentDidMount() {
-    if (typeof HTMLDialogElement !== 'function') {
-      dialogPolyfill.registerDialog(this.shareDialog());
-      dialogPolyfill.registerDialog(this.responseDialog());
-    }
-  }
-
-  shareDialog() {
-    return document.getElementById(this.refs.share.id);
-  }
-
-  responseDialog() {
-    return document.getElementById(this.refs.response.id);
-  }
-
-  toggleShareModal(event) {
-    event.preventDefault();
-    this.shareDialog().showModal();
-    document.body.classList.add('dialog-open');
-  }
-
-  toggleResponseModal() {
-    this.responseDialog().showModal();
-    document.body.classList.add('dialog-open');
-  }
-
-  closeDialog(dialogId) {
-    const dialog = document.getElementById(dialogId);
-    if (dialog.open) {
-      dialog.close();
-      document.body.classList.remove('dialog-open');
-    }
+    this.dialog.register([
+      this.refs.share.id,
+      this.refs.response.id,
+    ]);
   }
 
   render() {
@@ -52,7 +22,7 @@ class Slogan extends Component {
           <span>
             Anonymously
           </span>
-          <a href="#" onClick={this.toggleShareModal}>
+          <a href="#" onClick={() => this.dialog.toggle('share-modal')}>
             SHARE
           </a>
           <span>
@@ -64,7 +34,7 @@ class Slogan extends Component {
             <textarea id="comments" className="common txtstuff"></textarea>
             <span className="counter">200</span>
             <input type="submit" name="share" value="share your secret" className="share" />
-            <a className="close-reveal-modal" onClick={() => this.closeDialog('share-modal')}>
+            <a className="close-reveal-modal" onClick={() => this.dialog.close('share-modal')}>
               &#215;
             </a>
           </form>
@@ -84,7 +54,7 @@ class Slogan extends Component {
               <li><a id="share-another" href="#">share another</a></li>
             </ul>
           </div>
-          <a className="close-reveal-modal" onClick={() => this.closeDialog('share-response')}>
+          <a className="close-reveal-modal" onClick={() => this.dialog.close('share-response')}>
             &#215;
           </a>
         </dialog>

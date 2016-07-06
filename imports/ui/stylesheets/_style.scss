@@ -630,6 +630,7 @@ header {
   display: block;
   background: rgba(255,255,255,0.4);
   height: 56px;
+  box-shadow: 0 0 10px rgba(0,0,0,.4);
   font-size: 22px;
   font-family: 'heroiccondensed-book';
   text-transform: uppercase;
@@ -1072,18 +1073,17 @@ section.secret-content.static {
   }
 }
 .modalStyle {
-  visibility: hidden;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -300px;
-  margin-left: -330px;
   background: rgba(255,255,255,0.7);
+  box-shadow: 0 0 10px rgba(0,0,0,.4);
   text-align: center;
   width: 620px;
   height: auto;
   padding: 20px;
   z-index: 101;
+  border: none;
+  &::backdrop {
+    background: rgba(255, 255, 255, 0.6);
+  }
   h1 {
     font-size: 45px;
     color: #1a1a1a;
@@ -1116,6 +1116,7 @@ section.secret-content.static {
   button {
     position: absolute;
     bottom: -40px;
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
     left: 50%;
     margin-left: -100px;
     background: #fff;
@@ -1125,7 +1126,6 @@ section.secret-content.static {
       display: inline-block;
       text-decoration: none;
       font-size: 26px;
-      color: #4d4d4d;
       padding: 24px 56px;
       font-family: 'heroiccondensed-book';
       display: inline-block;
