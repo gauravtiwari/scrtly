@@ -1,0 +1,329 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+	<title>Scrtly - Share your secrets with world</title>
+
+	<meta charset="utf-8">
+	<meta name="keywords" content="secrets, share secrets"/>
+	<meta name="description" content="Scrt.ly is a place where people anonymously share secrets.">
+	<meta name="google-site-verification" content="s1Qchqm1qRfw61mcniSMNOda132A6MF60PLf-jx-iBA" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="img/welcome-bg.jpg"/>
+	<meta property="og:title" content="Scrt.ly - Share your secrets"/>
+	<meta property="og:description" content="Scrt.ly is a place where people anonymously share secrets."/>
+	<meta property="og:url" content="http://scrt.ly"/>
+	<meta property="og:site_name" content="SCRT.LY"/>
+	<meta name="twitter:card" value="Scrt.ly is a place where people anonymously share secrets.">
+	<meta name="twitter:site" value="@scrtly">
+	<meta name="twitter:creator" value="@scrtly">
+
+  <link rel="stylesheet" type="text/css" href="css/reveal.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/responsive.css">
+  <link rel="stylesheet" type="text/css" href="css/add2home.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.2.custom.min.css">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript">
+
+    var addToHomeConfig = {
+      animationIn: 'bubble',
+      animationOut: 'drop',
+      lifespan:10000,
+      expire:2,
+      touchIcon:true,
+      returningVisitor:true,
+      message: 'Welcome to Scrt.ly. Your device is an <strong>%device</strong>. Please click on bookmark to add to homescreen.'
+    };
+
+  </script>
+
+  <!-- Attach necessary scripts -->
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src='http://connect.facebook.net/en_US/all.js'></script>
+  <script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+  <script type="text/javascript" src="js/jquery.nicescroll.js"></script>
+  <script type="text/javascript" src="js/jquery.reveal.js"></script>
+  <script type="text/javascript" src="js/charCount.js"></script>
+  <script type="text/javascript" src="js/infinite.js"></script>
+  <script type="text/javascript" src="js/jquery.zclip.js"></script>
+  <script type="text/javascript" src="js/livequery.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/add2home.js"></script>
+
+
+	<script type="text/javascript">
+
+    $(document).ready(function(){
+
+      $.supersized({
+        random: 1,
+        slide_interval: 5000,
+        slides: [
+        {image : "uploads/705962584974898b17dd7fba25c160bed985b08b.jpg", title: 'IMAGE CREDIT <a href="mailto:">Adi</a>'},
+        {image : "uploads/6383e801c40b17cadf5104fccad8de1144d96153.jpg", title: 'IMAGE CREDIT <a href="mailto:">Adi</a>'},
+        {image : "uploads/a6a3f176d32a49a657bc5d8dd90e3adfc914d3a5.jpg", title: 'IMAGE CREDIT <a href="mailto:">Adi</a>'}
+        ]
+      });
+
+    });
+
+  </script>
+
+	<script type="text/javascript">
+	$(function(){
+		var nicesx = $('#content').niceScroll({touchbehavior:false,cursorcolor:"rgba(255,255,255,0.9)",cursoropacitymax:1,cursorwidth:14,zindex:9999,railpadding:{top:0,right:0,left:0,bottom:'-40px'},cursorborder:"1px solid rgba(255,255,255,0.0)",cursorborderradius:"15px"});
+	});
+
+	</script>
+	<script src='http://connect.facebook.net/en_US/all.js'></script>
+									<script type="text/javascript">
+								      FB.init({appId: "294770120653592", status: true, cookie: true});
+								    </script>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</head>
+<body class="individualSecret">
+	<!-- Container -->
+	<div id="container" class="clearfix">
+		<div class="container">
+			<!-- Header -->
+			<header>
+				<div class="logo">
+					<a href="/">&nbsp;</a>
+					<span>selected secrets from the internet.</span>
+				</div>
+
+				<div class="slogan">
+					<h1>
+						Anonymously <a href="#" id="share-story" data-reveal-id="myModalii">SHARE</a> your secret.
+					</h1>
+				</div>
+
+				<div class="menu">
+					<ul class="general-list">
+						<li>
+							<a id="sign-up" href="#">Subscribe via email</a>
+							<div class="dropdown">
+								<h1>People share secrets. We curate.</h1>
+								<h2>Subscribe to get the best of them.</h2>
+								<form>
+									<input type="text" id="mail" name="mail" placeholder="email address">
+									<input type="submit" id="submit" name="submit" value="subscribe">
+								</form>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<!-- End Header -->
+
+
+			<!-- Content -->
+			<div id="content">
+				<div class="inner-content">
+					<div class="secret-box">
+						<div class="inner-box">
+							<section class="secret-content" id="back-secret-id">
+								<p>this is a secret text</p>
+								<div class="reactionPrompt">
+										<div class="underline">
+												<label for="comment">this is</label>
+												<input type="text" data-secret="secret-id" name="comment" class="comment" id="comment">
+
+										</div>
+									</div>
+							</section>
+							<div class="comment-section clearfix">
+
+								<div class="sideContent">
+									<!-- social sharing -->
+									<div class="socialContainer">
+											<div id='fb-root'></div>
+											<a onclick='postToFeedSingle(); return false;' id="facebook" target="new"></a>
+											<script type="text/javascript">
+												function postToFeedSingle() {
+												// calling the API ...
+												var obj = {
+												method: 'feed',
+												redirect_uri: 'http://scrt.ly/',
+												link: 'http://scrt.ly/',
+												picture: 'img/welcome_email/welcome-bg.jpg',
+												name: 'www.scrt.ly',
+												description: 'this is secret post for FB'
+												};
+												function callback(response) {
+												document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];}
+												FB.ui(obj, callback);}
+												</script>
+
+												<a href="https://twitter.com/intent/tweet?url=http://www.scrt.ly&text=this is secret&via=scrtly&lang=en" id="twitter"></a>
+									</div>
+
+									<a href="/" class="more-secrets">MORE SECRETS</a>
+									<a href="#" class="daily-secret">Subscribe by email</a>
+								</div>
+
+								<div class="singlemessage"></div>
+								<ul class="comment-list" id="secret-id">
+									<li><p>Someone thought this was <span>funny, hilarious</span></p></li>
+                  <li><p>You thought this was <span>funny, hilarious</span></p></li>
+								</ul>
+								<a class="comment-number single" data-count="200" href="#">
+                  <span>200</span> reactions
+                </a>
+						</div>
+
+						<div class="emai-us">
+							<input type="text" name="email" id="email" placeholder="email address">
+							<input type="submit" value="submit" class="submit-email" id="submit-email">
+						</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End content -->
+
+			<div class="privacy modalStyle big-link" id="myModal">
+				<h1>Your secrets are safe with us.</h1>
+				<h2>WHEN YOU SUBMIT A SECRET:</h2>
+				<p>We don't ask for your name...</p>
+				<p>We don't ask for your email address...</p>
+				<p>We don't track your computer address...</p>
+				<h3>We have no idea who you are, and we don't care.</h3>
+				<button><a href="mailto: email@email.com">talk to us</a></button>
+				<a class="close-reveal-modal">&#215;</a>
+			</div>
+
+			<!-- About us Content -->
+			<div class="about-us modalStyle big-link" id="myModaliii">
+
+								<h1>Catharsis & Connection</h1>
+								<p>The year is 1999. I am home from college. It is 3am, and I am sitting at my family's computer. </p>
+								<p>The glow from the screen is the only light in an otherwise dark study. I am anonymous. And I am reading another anonymous person's story about her life-long regret of having an abortion when she was sixteen. </p>
+								<p>The comments on the post expose a sense of empathy and support from other readers. The experience invokes a sense of hope and wonder within me.
+								<p>At this moment in time, the internet feels like amorphous, uncharted territory, a nebulous, infinite landscape, serving as a haphazard community space for people's inner worlds. 
+								<p>The power and benefit of anonymity unleashed. Catharsis for us to share private thoughts we otherwise never do. Connection through personal, intimate stories. </p>
+								<p>But the importance of that type of space quickly fades. </p>
+								<p>As the internet races towards identification, verification, and perpetual tracking, it forsakes anonymity. A vital organ of the internet cannibalized, and with it that community space for our inner life.
+								<p>Scrt.ly is determined to reinvigorate that arena.</p>
+					<a class="close-reveal-modal">&#215;</a>
+			</div>
+			<!-- End About us content -->
+
+			<div class="share-your big-link" id="myModalii">
+				<form id="form" method="post" action="">
+					<textarea id="comments" class="common"></textarea>
+					<input type="submit" id="share" name="share" value="share your story" class="share">
+					<a class="close-reveal-modal">&#215;</a>
+				</form>
+			</div>
+
+			<div class="modal-response">
+				<div class="up-peace">
+					<h1>Thanks for sharing.</h1>
+					<h2>YOUR SECRET NOW LIVES HERE</h2>
+					<h3><p>http://hello.com</p><a id="copy-text" href="#">COPY</a></h3>
+					<p>...and is in the cue for inclusion on the home screen</p>
+				</div>
+				<div class="down-peace">
+					<ul>
+						<li><a href="#">subscribe by email</a></li>
+						<li><a href="#">browse secrets</a></li>
+						<li><a href="#">share another</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!--Control Bar-->
+			<div id="controls-wrapper" class="load-item">
+				<div id="controls">
+					<!--Slide captions displayed here-->
+					<div id="slidecaption"></div>
+
+					<div id="bottomNav">
+						<a id="privacy" href="#" data-reveal-id="myModal">privacy</a>
+						<a href="#" id="about-us" data-reveal-id="myModaliii">about scrt.ly</a>
+					</div>
+
+					<div class="socialContainer">
+						<div id='fb-root'></div>
+						<a onclick='postToFeed(); return false;' id="facebook" target="new"></a>
+						<script type="text/javascript">
+							function postToFeed() {
+							// calling the API ...
+							var obj = {
+							method: 'feed',
+							redirect_uri: 'http://scrt.ly/',
+							link: 'http://scrt.ly/',
+							picture: 'img/welcome_email/welcome-bg.jpg',
+							name: 'www.scrt.ly',
+							description: 'Share secrets anonymously'
+							};
+							function callback(response) {
+							document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];}
+							FB.ui(obj, callback);}
+							</script>
+
+							<a href="https://twitter.com/intent/tweet?url=http://www.scrt.ly&text=Share secrets anonymously&via=scrtly&lang=en" id="twitter"></a>
+				</div>
+				</div>
+			</div><!--/Control Bar-->
+		</div>
+
+	</div>
+	<!-- End Container -->
+
+	<!--Google Analytics -->
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-39007297-1']);
+_gaq.push(['_setDomainName', 'scrt.ly']);
+_gaq.push(['_setAllowLinker', true]);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!-- Start of Woopra Code -->
+<script type="text/javascript">
+function woopraReady(tracker) {
+    tracker.setDomain('scrt.ly');
+    tracker.setIdleTimeout(1800000);
+    tracker.track();
+    return false;
+}
+(function() {
+    var wsc = document.createElement('script');
+    wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+    wsc.type = 'text/javascript';
+    wsc.async = true;
+    var ssc = document.getElementsByTagName('script')[0];
+    ssc.parentNode.insertBefore(wsc, ssc);
+})();
+</script>
+<!-- End of Woopra Code -->
+
+
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(100587683); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/100587683ns.gif" /></p></noscript>
+
+</body>
+</html>

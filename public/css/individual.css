@@ -1,0 +1,27 @@
+
+/*-------------------------------------------------*/
+/* =  INDIVIDUAL SECRET STYLES
+/*-------------------------------------------------*/
+
+
+
+.comment-section .sideContent{
+	float: left;
+	display: inline-block;
+	width: 130px;
+	margin: 20px 20px 0 10px;
+}
+
+.comment-section .social-container{
+	display: block;
+}
+
+.comment-section ul.comment-list{
+	display: block;
+	float: left;
+}
+
+/* displays the buttons on indiv page */
+.sideContent a.daily-secret, .sideContent a.more-secrets {
+		display: block;
+	}

@@ -1,0 +1,21 @@
+/*
+*	Main Style
+*/
+body{
+	background: #F5F5F5;
+	padding: 40px 0 0;
+}
+
+.well-white{
+	background: #fff;
+	overflow-x: auto;
+}
+
+.main-cont{
+	margin: 30px 0;
+}
+
+.login-container{
+	width: 400px;
+	margin: 90px auto;
+}
