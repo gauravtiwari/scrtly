@@ -5,11 +5,11 @@ import Logo from './logo.jsx';
 import Slogan from './slogan.jsx';
 import Menu from './menu.jsx';
 
-const Header = () => (
+const Header = (props) => (
   <header>
     <Logo />
     <Slogan />
-    <Menu />
+    <Menu ee={props.ee} />
   </header>
 );
 

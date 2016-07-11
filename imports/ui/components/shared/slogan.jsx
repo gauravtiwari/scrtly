@@ -18,15 +18,15 @@ class Slogan extends Component {
   render() {
     return (
       <div className="slogan">
-        <h1>
+        <h1 className="text">
           <span>
-            Anonymously
+            Anonymously&nbsp;&nbsp;
           </span>
-          <a href="#" onClick={() => this.dialog.toggle('share-modal')}>
-            SHARE
+          <a className="share-link" href="#" onClick={() => this.dialog.toggle('share-modal')}>
+            SHARE&nbsp;&nbsp;
           </a>
           <span>
-            your secret.
+            your secret.&nbsp;&nbsp;
           </span>
         </h1>
         <dialog className="share-your big-link" id="share-modal" ref="share">

@@ -30,6 +30,9 @@ body {
   font: inherit;
   vertical-align: baseline;
   line-height: 1;
+  &.vegas-container {
+    padding: 0;
+  }
 }
 div {
   margin: 0;
@@ -626,18 +629,21 @@ header {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline;
-  display: block;
   background: rgba(255,255,255,0.4);
-  height: 56px;
   box-shadow: 0 0 10px rgba(0,0,0,.4);
   font-size: 22px;
   font-family: 'heroiccondensed-book';
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
+  flex-wrap: wrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: 100;
   &:hover {
     background: rgba(255,255,255,.9);
   }
@@ -766,78 +772,9 @@ html[xmlns] {
     }
   }
 }
-#supersized {
-  display: block;
-  position: fixed;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  img {
-    width: auto;
-    height: auto;
-    position: relative;
-    display: none;
-    outline: none;
-    border: none;
-  }
-  li {
-    display: block;
-    list-style: none;
-    z-index: -30;
-    position: fixed;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #111;
-  }
-  a {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  li.prevslide {
-    z-index: -20;
-    img {
-      display: inline;
-    }
-  }
-  li.activeslide {
-    z-index: -10;
-    img {
-      display: inline;
-    }
-  }
-  li.image-loading {
-    img {
-      visibility: hidden;
-    }
-  }
-}
-#supersized.speed {
-  img {
-    -ms-interpolation-mode: nearest-neighbor;
-    image-rendering: -moz-crisp-edges;
-  }
-}
-#supersized.quality {
-  img {
-    -ms-interpolation-mode: bicubic;
-    image-rendering: optimizeQuality;
-  }
-}
+
 #container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  padding: 5px;
-  overflow: hidden;
+  width: 100%;
 }
 .container {
   position: relative;
@@ -847,9 +784,7 @@ html[xmlns] {
   overflow: hidden;
 }
 .logo {
-  margin: 13px 0 10px 20px;
-  float: left;
-  width: 30%;
+  flex: 1 0 33.333%;
   a {
     float: left;
     opacity: 1;
@@ -865,10 +800,10 @@ html[xmlns] {
   }
 }
 .slogan {
-  margin: 18px 0;
   text-align: center;
-  width: 40%;
-  float: left;
+  flex: 1 0 33.333%;
+  box-sizing: border-box;
+  padding-top: 8px;
   h1 {
     color: #333;
     a {
@@ -881,15 +816,16 @@ html[xmlns] {
   }
 }
 .menu {
-  float: right;
-  margin: 18px 0;
+  flex: 1 0 33.333%;
+  box-sizing: border-box;
   text-align: right;
 }
 ul.general-list {
-  width: auto;
+  padding-right: 20px;
+  padding-top: 8px;
   float: right;
   li {
-    float: left;
+    display: inline-block;
     padding-right: 25px;
     position: relative;
     a {
@@ -980,15 +916,9 @@ ul.general-list {
   overflow: visible;
   margin-right: 30px;
 }
-#content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 100px;
-  top: 85px;
-  overflow-y: scroll;
-  margin-right: 20px;
-  margin-left: 20px;
+#main-content {
+  position: relative;
+  height: 100%;
 }
 .inner-content {
   position: relative;
@@ -1000,13 +930,16 @@ ul.general-list {
   max-width: 600px;
 }
 .secret-box {
-  min-height: 600px;
   width: 100%;
+  background-color: #000;
+  .inner-box {
+    text-align: center;
+  }
 }
 section.secret-content {
   position: relative;
+  text-align: center;
   p {
-    background-color: #000;
     text-align: center;
     padding: 50px 30px;
     opacity: .8;
@@ -1158,6 +1091,9 @@ section.secret-content.static {
   color: #aaa;
   text-shadow: 0 -1px 1px rbga(0,0,0,.6);
   font-weight: bold;
+  cursor: pointer;
+}
+.share-link {
   cursor: pointer;
 }
 .share-your {
@@ -1320,7 +1256,7 @@ section.secret-content.static {
   }
 }
 .scroll-more {
-  position: absolute;
+  position: fixed;
   left: 50%;
   width: 100px;
   margin-left: -50px;
@@ -1442,13 +1378,34 @@ a#facebook {
     opacity: 1;
   }
 }
-.comment-section {
-  ul.comment-list {
-    display: none;
-    margin-bottom: 10px;
+
+.comment-number {
+  display: inline-block;
+  padding: 4px 0;
+  width: 90px;
+  cursor: pointer;
+  text-align: center;
+  background: #2f2f2f;
+  font-size: 17px;
+  font-family: 'heroiccondensed-book';
+  text-transform: uppercase;
+  color: #b0b0b0;
+  margin: 10px 0;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.8;
   }
-  .sideContent {
-    display: none;
+  span {
+    color: #fff;
+  }
+}
+
+.comment-section {
+  display: none;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  .comment-list {
+    margin-bottom: 10px;
   }
   .socialContainer {
     float: none;
@@ -1458,48 +1415,52 @@ a#facebook {
       float: none;
     }
   }
-  .sideContent.active {
-    float: left;
-    display: inline-block;
-    width: 130px;
-    margin: 20px 20px 10px 10px;
-  }
-  ul.comment-list.active {
-    float: left;
+
+  &.active {
     display: block;
-  }
-  .socialContainer.active {
-    display: block;
-  }
-  a.daily-secret {
-    display: block;
-    background-color: #212121;
-    margin-top: 10px;
-    padding: 15px;
-    font-size: 20px;
-    color: #aeadad;
-    text-decoration: none;
-    font-family: 'heroiccondensed-book';
-    &:hover {
-      color: #fff;
+    .comment-list {
+      float: left;
+      display: block;
+    }
+    .socialContainer {
+      display: block;
+    }
+    .sideContent {
+      float: left;
+      display: inline-block;
+      width: 130px;
+      margin: 20px 20px 10px 10px;
+    }
+
+    .daily-secret {
+      display: block;
+      background-color: #212121;
+      margin-top: 10px;
+      padding: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #aeadad;
+      text-decoration: none;
+      font-family: 'heroiccondensed-book';
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .more-secrets {
+      display: block;
+      background-color: #212121;
+      margin-top: 10px;
+      padding: 15px;
+      font-size: 20px;
+      color: #aeadad;
+      text-decoration: none;
+      font-family: 'heroiccondensed-book';
+      &:hover {
+        color: #fff;
+      }
     }
   }
-  a.more-secrets {
-    display: block;
-    background-color: #212121;
-    margin-top: 10px;
-    padding: 15px;
-    font-size: 20px;
-    color: #aeadad;
-    text-decoration: none;
-    font-family: 'heroiccondensed-book';
-    &:hover {
-      color: #fff;
-    }
-  }
-  width: 100%;
-  background: rgba(0,0,0,0.8);
-  text-align: center;
   ul {
     text-align: left;
     width: 250px;
@@ -1525,24 +1486,6 @@ a#facebook {
           color: #fff;
         }
       }
-    }
-  }
-  a.comment-number {
-    display: inline-block;
-    padding: 4px 0;
-    width: 90px;
-    background: #2f2f2f;
-    font-size: 17px;
-    font-family: 'heroiccondensed-book';
-    text-transform: uppercase;
-    color: #b0b0b0;
-    margin: 10px 0;
-    text-decoration: none;
-    &:hover {
-      opacity: 0.8;
-    }
-    span {
-      color: #fff;
     }
   }
   ul.active {

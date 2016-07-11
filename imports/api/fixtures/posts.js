@@ -14,7 +14,7 @@ const PostsSeed = [
   {
     body: 'This is a fourth great secret of my life with all the stuff you need to laugh',
     ip: '127.0.0.4',
-  }
+  },
 ];
 
 export default PostsSeed;

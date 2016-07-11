@@ -28,9 +28,6 @@
   #container {
     padding: 1px;
   }
-  .secret-box {
-    min-height: 200px;
-  }
   .share-your {
     width: 250px;
     height: 150px;
@@ -48,18 +45,12 @@
     }
   }
   header {
-    height: 20px;
-    padding: 5px 10px;
-    font-size: 15px;
-    text-align: center;
     background: rgba(0,0,0,.9);
     &:hover {
       background: rgba(0,0,0,.9);
     }
   }
   .logo {
-    width: 20%;
-    margin: 0;
     a {
       width: 20px;
       height: 20px;
@@ -70,8 +61,6 @@
     }
   }
   .slogan {
-    margin: 5px 0;
-    width: 45%;
     h1 {
       color: #999;
       a {
@@ -87,12 +76,6 @@
       font-size: 22px;
     }
   }
-  .menu {
-    min-width: 30px;
-    margin: 3px 0;
-    padding: 0;
-    float: right;
-  }
   .general-list {
     li {
       padding: 0 5px;
@@ -102,9 +85,8 @@
       }
     }
   }
-  #content {
-    top: 50px;
-    bottom: 50px;
+  #main-content {
+    margin-top: 50px;
   }
   .scroll-more {
     display: none !important;

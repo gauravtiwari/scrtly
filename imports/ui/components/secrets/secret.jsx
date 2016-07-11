@@ -1,28 +1,71 @@
+/* eslint no-underscore-dangle: 0 */
+
 import React, { Component } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Comments } from '../../../api/collections/comments';
+import { Words } from '../../../api/collections/words';
+import { Meteor } from 'meteor/meteor';
+import $ from 'jquery';
 
 // Secret Component
 class Secret extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.resizeSecretBox = this.resizeSecretBox.bind(this);
+    this.toggleComments = this.toggleComments.bind(this);
+    this.toggleSubscribe = this.toggleSubscribe.bind(this);
+  }
+
+  componentDidMount() {
+    Meteor.subscribe('words', null);
+    this.resizeSecretBox();
+    $(window).resize(() => {
+      this.resizeSecretBox();
+    });
+  }
+
+  resizeSecretBox() {
+    const height = $(window).height()
+      - $('.secret-box').height() - $('header').height();
+
+    $('.inner-box').css({
+      'margin-top': height / 2,
+      'margin-bottom': height,
+    });
+  }
+
+  toggleComments(event) {
+    event.preventDefault();
+    const { comments, count } = this.refs;
+    $(comments).toggleClass('active');
+    if ($(comments).hasClass('active')) {
+      $(count).text('Hide');
+    } else {
+      $(count).text(this.props.comments.length);
+    }
+  }
+
+  toggleSubscribe(event) {
+    event.preventDefault();
+    $('.dropdown').toggleClass('active');
   }
 
   render() {
-    const { secret } = this.props;
-
+    const { secret, comments } = this.props;
     return (
       <div className="secret-box">
         <div className="inner-box">
           <section className="secret-content" id="back-1">
             <p>{secret.body}</p>
-              <div className="reactionPrompt">
-                <div className="underline">
-                  <label for="comment">This is</label>
-                  <input type="text" name="comment" placeholder="Enter comment" />
-                </div>
+            <div className="reactionPrompt">
+              <div className="underline">
+                <label htmlFor="comment">This is</label>
+                <input type="text" name="comment" placeholder="Enter comment" />
               </div>
+            </div>
           </section>
 
-          <div className="comment-section clearfix">
+          <div className="comment-section clearfix" ref="comments">
             <div className="sideContent">
               <div className="socialContainer">
                   <a href="https://www.facebook.com/dialog/feed?
@@ -35,22 +78,25 @@ class Secret extends Component {
 
                   <a href="https://twitter.com/intent/tweet?url=http://www.scrt.ly&text=this is secret text&via=scrtly&lang=en" id="twitter"></a>
               </div>
-              <a href="#" className="daily-secret">SUBSCRIBE</a>
+              <a onClick={this.toggleSubscribe} className="daily-secret">SUBSCRIBE</a>
             </div>
 
 
             <div className="message" id="message-secret-id"></div>
-            <ul className="comment-list" id="secret-secret-id">
-              <li><p>Someone thought this was <span>funny, hilarious</span></p></li>
-              <li><p>You thought this was <span>funny, hilarious</span></p></li>
+            <ul className="comment-list">
+              {comments.map((comment) => (
+                <li key={comment._id}>
+                  <p>Someone thought this was <span>{comment.body}</span></p>
+                </li>
+              ))}
             </ul>
 
             <div className="clearfix"></div>
-            <br clear="all" />
-            <a className="comment-number" data-count="200" href="#">
-              <span>200</span> reactions
-            </a>
+            <br />
           </div>
+          <a className="comment-number" onClick={this.toggleComments}>
+            <span ref="count">{comments.length}</span> reactions
+          </a>
         </div>
       </div>
     );
@@ -61,4 +107,14 @@ Secret.propTypes = {
   secret: React.PropTypes.object,
 };
 
-export default Secret;
+const SecretContainer = createContainer((props) => {
+  const handle = Meteor.subscribe('comments', props.secret._id);
+  const wordsHandle = Meteor.subscribe('words', null);
+  return {
+    secret: props.secret,
+    secretLoading: ! handle.ready(),
+    comments: Comments.find({ postId: props.secret._id }).fetch(),
+  };
+}, Secret);
+
+export default SecretContainer;

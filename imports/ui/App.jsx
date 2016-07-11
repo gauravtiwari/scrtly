@@ -5,8 +5,6 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import $ from 'jquery';
-import { connect } from 'react-apollo';
-import gql from 'apollo-client/gql';
 
 // Collections
 import { Posts } from '../api/collections/posts.js';
@@ -17,6 +15,13 @@ import Footer from './components/shared/footer.jsx';
 import Secret from './components/secrets/secret.jsx';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 10,
+    };
+  }
+
   componentDidMount() {
     $('body').vegas({
       slides: [
@@ -42,7 +47,7 @@ class App extends Component {
     <div id="container" className="clearfix">
       <div className="container">
         <Header />
-        <div id="content">
+        <div id="main-content">
           <div className="inner-content">
             {posts.map((post) => (
               <Secret key={post._id} secret={post} />
@@ -65,8 +70,8 @@ App.propTypes = {
 };
 
 // This data container for APP
-const AppContainer = createContainer(() => {
-  const postsHandle = Meteor.subscribe('posts');
+const AppContainer = createContainer((props) => {
+  const postsHandle = Meteor.subscribe('posts', 20);
   const loading = !postsHandle.ready();
   const posts = Posts.find();
   const hasPosts = !loading && !!posts;
