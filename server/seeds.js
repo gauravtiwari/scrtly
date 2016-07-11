@@ -5,7 +5,7 @@ import { Comments } from '../imports/api/collections/comments';
 import { Words } from '../imports/api/collections/words';
 
 import WordsSeed from '../imports/api/fixtures/words';
-import PostsSeed from '../imports/api/fixtures/posts';
+import Secrets from '../server/data.js';
 
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
@@ -18,15 +18,17 @@ Meteor.methods({
       });
     });
 
-    _.forEach(PostsSeed, (post) => {
-      Posts.insert(post, (_error, result) => {
-        const Comment = {
-          post: result,
-          ip: '127.0.0.1',
-          body: 'adventurous, awesome, cool',
-        };
-        Comments.insert(Comment, () => {
-          console.log('Comment added for', result);
+    _.forEach(Secrets, (post) => {
+      Posts.insert({ body: post.secret.body, ip: '127.0.0.1' }, (_error, result) => {
+        _.forEach(post.secret.comments, (comment) => {
+          const Comment = {
+            postId: result,
+            ip: '127.0.0.1',
+            body: comment.body,
+          };
+          Comments.insert(Comment, () => {
+            console.log('Comment added for', result);
+          });
         });
       });
     });
