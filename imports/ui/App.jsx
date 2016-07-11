@@ -14,9 +14,13 @@ import Header from './components/shared/header.jsx';
 import Footer from './components/shared/footer.jsx';
 import Secret from './components/secrets/secret.jsx';
 
+import 'spinkit/css/spinkit.css';
+
 class App extends Component {
   constructor(props) {
     super(props);
+    this.renderLoading = this.renderLoading.bind(this);
+    this.renderMain = this.renderMain.bind(this);
     this.state = {
       page: 10,
     };
@@ -41,19 +45,42 @@ class App extends Component {
     });
   }
 
+
+  renderLoading() {
+    return (
+      <div className="loading-container">
+        <div className="sk-wave">
+          <div className="sk-rect sk-rect1"></div>
+          <div className="sk-rect sk-rect2"></div>
+          <div className="sk-rect sk-rect3"></div>
+          <div className="sk-rect sk-rect4"></div>
+          <div className="sk-rect sk-rect5"></div>
+        </div>
+      </div>
+    );
+  }
+
+  renderMain() {
+    return (
+      <div id="main-content">
+        <div className="inner-content">
+          {this.props.posts.map((post) => (
+            <Secret key={post._id} secret={post} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const { posts } = this.props;
+    const { loading } = this.props;
+    const renderSecrets = loading ? this.renderLoading() : this.renderMain();
+
     return (
     <div id="container" className="clearfix">
       <div className="container">
         <Header />
-        <div id="main-content">
-          <div className="inner-content">
-            {posts.map((post) => (
-              <Secret key={post._id} secret={post} />
-            ))}
-          </div>
-        </div>
+        {renderSecrets}
       </div>
       <div className="scroll-more">
         <a href="#" className="prev-secret"></a>
@@ -76,7 +103,7 @@ const AppContainer = createContainer((props) => {
   const posts = Posts.find();
   const hasPosts = !loading && !!posts;
   return {
-    loading,
+    loading: true,
     hasPosts,
     posts: hasPosts ? posts.fetch() : [],
   };
