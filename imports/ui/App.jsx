@@ -16,6 +16,14 @@ import Secret from './components/secrets/secret.jsx';
 
 import 'spinkit/css/spinkit.css';
 
+const loaderStyle = {
+  margin: '20% auto',
+  width: '50px',
+  height: '40px',
+  textAlign: 'center',
+  fontSize: '10px',
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +57,7 @@ class App extends Component {
   renderLoading() {
     return (
       <div className="loading-container">
-        <div className="sk-wave">
+        <div className="sk-wave" style={loaderStyle}>
           <div className="sk-rect sk-rect1"></div>
           <div className="sk-rect sk-rect2"></div>
           <div className="sk-rect sk-rect3"></div>
@@ -96,14 +104,14 @@ App.propTypes = {
   posts: React.PropTypes.array,
 };
 
-// This data container for APP
+// Data container for the APP
 const AppContainer = createContainer((props) => {
   const postsHandle = Meteor.subscribe('posts', 20);
   const loading = !postsHandle.ready();
   const posts = Posts.find();
   const hasPosts = !loading && !!posts;
   return {
-    loading: true,
+    loading: loading,
     hasPosts,
     posts: hasPosts ? posts.fetch() : [],
   };

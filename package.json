@@ -9,6 +9,11 @@
   },
   "dependencies": {
     "dialog-polyfill": "^0.4.3",
+    "express": "^4.14.0",
+    "express-graphql": "^0.5.3",
+    "graphql": "^0.6.1",
+    "graphql-relay": "^0.4.2",
+    "http-proxy-middleware": "^0.17.0",
     "invariant": "^2.2.1",
     "jquery": "^3.0.0",
     "meteor-node-stubs": "~0.2.0",
