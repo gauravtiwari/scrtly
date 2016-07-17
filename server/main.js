@@ -3,6 +3,8 @@
 import { Meteor } from 'meteor/meteor';
 import proxyMiddleware from 'http-proxy-middleware';
 import express from 'express';
+import fs from 'fs';
+import path from 'path';
 
 import '../imports/api/db/schemas.js';
 import '../imports/api/publications/posts.js';
@@ -11,6 +13,8 @@ import { Posts } from '../imports/api/collections/posts';
 import { Comments } from '../imports/api/collections/comments';
 import { Words } from '../imports/api/collections/words';
 import './seeds.js';
+import { graphql }  from 'graphql';
+import { introspectionQuery, printSchema } from 'graphql/utilities';
 
 import Schema from '../imports/api/schema.js';
 import graphqlHTTP from 'express-graphql';
@@ -34,6 +38,26 @@ WebApp.rawConnectHandlers.use(
 );
 
 Meteor.startup(() => {
+  (async () => {
+    const result = await graphql(Schema, introspectionQuery);
+    if (result.errors) {
+      console.warn(
+        'ERROR introspecting schema: ',
+        JSON.stringify(result.errors, null, 2)
+      );
+    } else {
+      fs.writeFileSync(
+        path.join(process.env.PWD, '/data/schema.json'),
+        JSON.stringify(result, null, 2)
+      );
+    }
+  })();
+
+  fs.writeFileSync(
+    path.join(process.env.PWD, '/data/schema.graphql'),
+    printSchema(Schema)
+  );
+
   // Posts.remove({});
   // Comments.remove({});
   // Words.remove({});
