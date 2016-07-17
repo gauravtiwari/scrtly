@@ -70,12 +70,13 @@ const ViewerType = new GraphQLObjectType({
       type: PostConnection,
       description: 'A collection of posts for viewer',
       args: connectionArgs,
-      resolve: (_, args) => connectionFromArray(resolveAllPosts(), args),
+      resolve: (_, args) => connectionFromArray(resolveAllPosts(args), args),
     },
-    word: {
-      type: WordType,
+    words: {
+      type: new GraphQLList(WordType),
+      args: { query: { type: GraphQLString }},
       description: 'Get a word for comment',
-      resolve: (_, args) => connectionFromArray(resolveWord(), args),
+      resolve: (_, args) => resolveWords(args),
     }
   }),
   interfaces: [nodeInterface],
@@ -85,15 +86,18 @@ const PostType = new GraphQLObjectType({
   name: 'Post',
   description: 'A single post',
   fields: () => ({
-    id: globalIdField('Post'),
+    id: {
+      description: 'The ID of an object',
+      type: new GraphQLNonNull(GraphQLID),
+      resolve: (root, _args, _context) => root._id,
+    },
     body: {
       type: GraphQLString,
     },
     comments: {
-      type: CommentConnection,
-      description: 'A collection of comments for viewer',
-      args: connectionArgs,
-      resolve: (_, args) => connectionFromArray(resolvePostComments(), args),
+      type: new GraphQLList(CommentType),
+      description: 'A collection of comments for the post',
+      resolve: (post, args, _context) => resolvePostComments(post),
     },
   }),
   interfaces: [nodeInterface],
@@ -103,7 +107,11 @@ const WordType = new GraphQLObjectType({
   name: 'Word',
   description: 'A single word',
   fields: () => ({
-    id: globalIdField('Word'),
+    id: {
+      description: 'The ID of an object',
+      type: new GraphQLNonNull(GraphQLID),
+      resolve: (root, _args, _context) => root._id,
+    },
     name: {
       type: GraphQLString,
     },
@@ -115,7 +123,11 @@ const CommentType = new GraphQLObjectType({
   name: 'Comment',
   description: 'A single comment',
   fields: () => ({
-    id: globalIdField('Post'),
+    id: {
+      description: 'The ID of an object',
+      type: new GraphQLNonNull(GraphQLID),
+      resolve: (root, _args, _context) => root._id,
+    },
     body: {
       type: GraphQLString,
     },
@@ -187,11 +199,20 @@ const resolveWord = (args) => {
 };
 
 const resolveAllPosts = (args) => {
-  return Posts.find().fetch();
+  return Posts.find(
+    {}, {
+      sort: { createdAt: -1 }, limit: args.first
+  }).fetch();
 };
 
-const resolvePostComments = (args) => {
-  return Comments.find({ post: post._id }).fetch();
+const resolvePostComments = (post) => {
+  return Comments.find({ postId: post._id }).fetch();
+};
+
+const resolveWords = (args) => {
+  return Words.find(
+    { name: { $regex: new RegExp(args.query, 'i'), $options:"i" } },
+  ).fetch();
 };
 
 
