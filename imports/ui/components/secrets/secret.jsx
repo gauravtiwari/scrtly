@@ -1,11 +1,14 @@
 /* eslint no-underscore-dangle: 0 */
 
 import React, { Component } from 'react';
+import Relay from 'react-relay';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Comments } from '../../../api/collections/comments';
 import { Words } from '../../../api/collections/words';
 import { Meteor } from 'meteor/meteor';
 import $ from 'jquery';
+
+import Comment from '../comments/comment';
 
 // Secret Component
 class Secret extends Component {
@@ -52,6 +55,7 @@ class Secret extends Component {
 
   render() {
     const { secret, comments } = this.props;
+
     return (
       <div className="secret-box">
         <div className="inner-box">
@@ -85,9 +89,7 @@ class Secret extends Component {
             <div className="message" id="message-secret-id"></div>
             <ul className="comment-list">
               {comments.map((comment) => (
-                <li key={comment._id}>
-                  <p>Someone thought this was <span>{comment.body}</span></p>
-                </li>
+                <Comment key={comment.id} comment={comment} />
               ))}
             </ul>
 
@@ -107,14 +109,15 @@ Secret.propTypes = {
   secret: React.PropTypes.object,
 };
 
-const SecretContainer = createContainer((props) => {
-  const handle = Meteor.subscribe('comments', props.secret._id);
-  const wordsHandle = Meteor.subscribe('words', null);
-  return {
-    secret: props.secret,
-    secretLoading: ! handle.ready(),
-    comments: Comments.find({ postId: props.secret._id }).fetch(),
-  };
-}, Secret);
+const SecretContainer = Relay.createContainer(Secret, {
+  fragments: {
+    secret: () => Relay.QL`
+      fragment on Post {
+        id,
+        body,
+      }
+    `,
+  },
+});
 
 export default SecretContainer;

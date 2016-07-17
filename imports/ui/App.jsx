@@ -3,6 +3,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
+import Relay from 'react-relay';
 import { createContainer } from 'meteor/react-meteor-data';
 import $ from 'jquery';
 
@@ -13,28 +14,25 @@ import { Posts } from '../api/collections/posts.js';
 import Header from './components/shared/header.jsx';
 import Footer from './components/shared/footer.jsx';
 import Secret from './components/secrets/secret.jsx';
-
-import 'spinkit/css/spinkit.css';
-
-const loaderStyle = {
-  margin: '20% auto',
-  width: '50px',
-  height: '40px',
-  textAlign: 'center',
-  fontSize: '10px',
-}
+import Comment from './components/comments/comment.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.renderLoading = this.renderLoading.bind(this);
-    this.renderMain = this.renderMain.bind(this);
+    this._handleScrollLoad = this._handleScrollLoad.bind(this);
     this.state = {
       page: 10,
+      loading: false,
+      done: false,
     };
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._handleScrollLoad);
+  }
+
   componentDidMount() {
+    window.addEventListener('scroll', this._handleScrollLoad);
     $('body').vegas({
       slides: [
         {
@@ -53,42 +51,48 @@ class App extends Component {
     });
   }
 
-
-  renderLoading() {
-    return (
-      <div className="loading-container">
-        <div className="sk-wave" style={loaderStyle}>
-          <div className="sk-rect sk-rect1"></div>
-          <div className="sk-rect sk-rect2"></div>
-          <div className="sk-rect sk-rect3"></div>
-          <div className="sk-rect sk-rect4"></div>
-          <div className="sk-rect sk-rect5"></div>
-        </div>
-      </div>
-    );
+  _handleScrollLoad() {
+    if ( $(window).scrollTop() > $(document).height() - $(window).height() - 200 && !this.state.loading) {
+      if(true) {
+        console.log(this.props.relay.variables.count);
+        this.setState({
+          loading: true,
+        });
+        this.props.relay.setVariables({
+          count: this.props.relay.variables.count + 20
+        }, readyState => {
+          if (readyState.done) {
+            this.setState({
+              loading: false,
+            })
+          }
+        });
+        this.props.relay.forceFetch();
+        console.log(this.props.relay.variables.count);
+      } else {
+        if (!this.state.done) {
+          this.setState({
+            done: true,
+          });
+        }
+      }
+    }
   }
 
-  renderMain() {
-    return (
-      <div id="main-content">
-        <div className="inner-content">
-          {this.props.posts.map((post) => (
-            <Secret key={post._id} secret={post} />
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   render() {
-    const { loading } = this.props;
-    const renderSecrets = loading ? this.renderLoading() : this.renderMain();
-
+    const { viewer } = this.props;
     return (
     <div id="container" className="clearfix">
       <div className="container">
         <Header />
-        {renderSecrets}
+        <div id="main-content">
+          <div className="inner-content">
+            {viewer.posts.edges.map(({ node }) => (
+              <Secret key={node.id} secret={node} comments={node.comments} />
+            ))}
+          </div>
+        </div>
       </div>
       <div className="scroll-more">
         <a href="#" className="prev-secret"></a>
@@ -101,20 +105,36 @@ class App extends Component {
 }
 
 App.propTypes = {
-  posts: React.PropTypes.array,
+  viewer: React.PropTypes.object,
 };
 
-// Data container for the APP
-const AppContainer = createContainer((props) => {
-  const postsHandle = Meteor.subscribe('posts', 20);
-  const loading = !postsHandle.ready();
-  const posts = Posts.find();
-  const hasPosts = !loading && !!posts;
-  return {
-    loading: loading,
-    hasPosts,
-    posts: hasPosts ? posts.fetch() : [],
-  };
-}, App);
+const AppContainer = Relay.createContainer(App, {
+  initialVariables: {
+    count: 20,
+    next: null,
+  },
+  fragments: {
+    viewer: () => Relay.QL`
+      fragment on Viewer {
+        posts(first: $count, after: $next) {
+          edges {
+            cursor,
+            node {
+              id,
+              ${Secret.getFragment('secret')},
+              comments {
+                id,
+                ${Comment.getFragment('comment')}
+              },
+            },
+          },
+          pageInfo {
+            hasNextPage
+          },
+        },
+      }
+    `,
+  },
+});
 
 export default AppContainer;
