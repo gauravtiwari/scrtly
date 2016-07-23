@@ -11,24 +11,12 @@
     "babel-core": "^6.10.4",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-relay-plugin": "0.9.1",
-    "babel-relay-plugin-loader": "^0.9.0",
     "dialog-polyfill": "^0.4.3",
-    "express": "^4.14.0",
-    "express-graphql": "^0.5.3",
-    "graphql": "^0.6.1",
-    "graphql-relay": "^0.4.2",
-    "http-proxy-middleware": "^0.17.0",
     "invariant": "^2.2.1",
+    "iscroll": "^5.2.0",
     "jquery": "^3.0.0",
     "meteor-node-stubs": "~0.2.0",
-    "react": "^15.2.0",
-    "react-addons-pure-render-mixin": "^15.1.0",
-    "react-dom": "^15.2.0",
-    "react-mounter": "^1.2.0",
-    "react-relay": "0.9.1",
     "spinkit": "^1.2.5",
     "tracker-component": "^1.3.21",
     "vegas": "^2.2.1",
@@ -42,40 +30,24 @@
     "eslint-import-resolver-meteor": "^0.2.3",
     "eslint-plugin-import": "^1.9.2",
     "eslint-plugin-jsx-a11y": "^1.5.3",
-    "eslint-plugin-meteor": "^3.6.0",
-    "eslint-plugin-react": "^5.2.2"
-  },
-  "metadata": {
-    "graphql": {
-      "schema": "./data/schema.json"
-    }
+    "eslint-plugin-meteor": "^3.6.0"
   },
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 6,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
+      "sourceType": "module"
     },
     "settings": {
-      "import/resolver": "meteor",
-      "react": {
-        "pragma": "React",
-        "version": "15.0"
-      }
+      "import/resolver": "meteor"
     },
     "plugins": [
-      "meteor",
-      "react"
+      "meteor"
     ],
     "extends": [
       "airbnb/base",
       "plugin:meteor/recommended"
     ],
     "rules": {
-      "react/jsx-uses-react": "error",
-      "react/jsx-uses-vars": "error",
       "meteor/eventmap-params": [
         2,
         {

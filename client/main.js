@@ -1,34 +1,32 @@
-import { Meteor } from 'meteor/meteor';
-import { mount } from 'react-mounter';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Relay from 'react-relay';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-require('vegas');
-require('vegas/dist/vegas.css');
+import '../imports/ui/layouts/app-container.js';
+import '../imports/ui/pages/secret-list.js';
 
-import AppContainer from '../imports/ui/App.jsx';
-import AppRoute from '../imports/ui/routes/appRoute.js';
-import Loading from '../imports/ui/components/shared/loading.jsx';
-import Error from '../imports/ui/components/shared/error.jsx';
+import $ from 'jquery';
+import 'vegas';
 
-Meteor.startup(() => {
-  ReactDOM.render(
-    <Relay.Renderer
-      Container={AppContainer}
-      queryConfig={new AppRoute}
-      environment={Relay.Store}
-      render={({ props, error, retry }) => {
-        if (props) {
-          return (
-            <AppContainer {...props} />
-          );
-        } else if (error) {
-          return <Error retry={retry} />;
-        }
-        return <Loading />;
-      }}
-    />,
-    document.getElementById('app')
-  );
+$('body').vegas({
+  slides: [
+    {
+      src: 'uploads/705962584974898b17dd7fba25c160bed985b08b.jpg',
+      title: 'IMAGE CREDIT <a href="mailto:">Adi</a>',
+    },
+    {
+      src: 'uploads/6383e801c40b17cadf5104fccad8de1144d96153.jpg',
+      title: 'IMAGE CREDIT <a href="mailto:">Adi</a>',
+    },
+    {
+      src: 'uploads/a6a3f176d32a49a657bc5d8dd90e3adfc914d3a5.jpg',
+      title: 'IMAGE CREDIT <a href="mailto:">Adi</a>',
+    },
+  ],
+});
+
+FlowRouter.route('/', {
+  name: 'App.home',
+  action() {
+    BlazeLayout.render('appContainer', { main: 'secretList' });
+  },
 });

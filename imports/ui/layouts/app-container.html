@@ -1,0 +1,23 @@
+<template name="appContainer">
+  <div id="container" class="clearfix">
+    <div class="container">
+      {{> header}}
+      <div id="main-content">
+        <div class="inner-content">
+          {{#momentum plugin="fade"}}
+            {{#if Template.subscriptionsReady}}
+              {{> Template.dynamic template=main}}
+            {{else}}
+              {{> loading}}
+            {{/if}}
+          {{/momentum}}
+        </div>
+      </div>
+    </div>
+    <div class="scroll-more">
+      <a href="#" class="prev-secret"></a>
+      <a href="#" class="next-secret"></a>
+    </div>
+    {{> footer}}
+  </div>
+</template>
