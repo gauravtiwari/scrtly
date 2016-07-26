@@ -1,29 +1,42 @@
 /* eslint no-console: 0 */
 
+// Collections and seeds
 import { Posts } from '../imports/app/collections/posts';
 import { Comments } from '../imports/app/collections/comments';
-import { Words } from '../imports/app/collections/words';
-
 import WordsSeed from '../imports/app/db/wordsSeed.js';
 import Secrets from '../imports/app/db/seedData.js';
 
+// Libs
+import algoliasearch from 'algoliasearch';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 
 Meteor.methods({
   'Database.seed': () => {
-    _.forEach(WordsSeed, (word) => {
-      Words.insert({ name: word }, (_error, result) => {
-        console.log('Words added', result);
-      });
+    const client = algoliasearch(
+      Meteor.settings.public.id,
+      Meteor.settings.private.key
+    );
+
+    const index = client.initIndex(
+      Meteor.settings.public.indexName
+    );
+
+    index.addObjects(WordsSeed, (err, content) => {
+      if (err) {
+        console.error(err);
+      }
+      console.warn(content);
     });
 
     _.forEach(Secrets, (post) => {
+      let ipIndex = 0;
       Posts.insert({ body: post.secret.body, ip: '127.0.0.1' }, (_error, result) => {
         _.forEach(post.secret.comments, (comment) => {
+          ipIndex = ipIndex + 1;
           const Comment = {
             postId: result,
-            ip: '127.0.0.1',
+            ip: `127.0.0.${ipIndex}`,
             body: comment.body,
           };
           Comments.insert(Comment, () => {

@@ -12,6 +12,18 @@ import { Words } from '../imports/app/collections/words';
 
 import './seeds.js';
 
+if(Meteor.isServer) {
+  Meteor.methods({
+    addComment: (response) => {
+      const comment = {
+        ip: DDP._CurrentInvocation.get().connection.clientAddress,
+        ...response,
+      };
+      return Comments.insert(comment);
+    }
+  });
+}
+
 Meteor.startup(() => {
   // Posts.remove({});
   // Comments.remove({});
@@ -26,5 +38,7 @@ Meteor.startup(() => {
 
   Comments._ensureIndex({
     postId: 1,
-  });
+    body: 1,
+    ip: 1,
+  }, { unique: true , sparse: true });
 });
