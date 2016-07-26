@@ -951,6 +951,58 @@ section.secret-content {
     line-height: 30px;
     text-shadow: 2px 0 3px #000;
   }
+  .reactionPrompt {
+    position: relative;
+    .help {
+      font-family: 'BookmanOldStyle';
+      display: none;
+      position: absolute;
+      right: 10px;
+      color: #b0b0b0;
+      top: 10px;
+      font-size: 10px;
+      &.active {
+        display: block;
+      }
+    }
+    .reactions-dropdown {
+      position: absolute;
+      box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+      background-color: #0a0d0b;
+      min-width: 130px;
+      left: 85px;
+      z-index: 100;
+      border: 2px solid #4a4b4b;
+      display: none;
+      &.active {
+        display: block;
+      }
+      ul {
+        padding: 10px 0;
+        li {
+          width: 100%;
+          clear: both;
+          &:focus, &:hover {
+            background-color: white;
+          }
+          a {
+            padding: 5px 10px;
+            display: block;
+            color: #b0b0b0;
+            font-size: 18px;
+            font-family: 'BookmanOldStyle';
+            cursor: pointer;
+            &:focus, &:hover {
+              color: #000;
+            }
+          }
+          &:last-child {
+            border-bottom: 0
+          }
+        }
+      }
+    }
+  }
 }
 section.secret-content.static {
   padding: 20px;
@@ -1529,6 +1581,8 @@ a#facebook {
   text-align: center;
   padding-bottom: 17px;
   background-color: rgba(0,0,0,0.8);
+  max-width: 320px;
+  margin: 0 auto;
   .underline {
     display: inline-block;
     border: 1px solid #444;
@@ -1676,4 +1730,30 @@ a#facebook {
 }
 .message.active {
   text-align: left;
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  color: #853408!important;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
