@@ -12,8 +12,6 @@ import algoliasearch from 'algoliasearch/src/browser/builds/algoliasearch.js';
 import { Comments } from '../../../../imports/app/collections/comments.js';
 import './secret.html';
 
-console.log(Meteor.settings);
-
 const client = algoliasearch(
   Meteor.settings.public.id,
   Meteor.settings.public.searchKey
@@ -116,7 +114,7 @@ Template.secret.events({
     const clicked = instance.$(event.target);
     const reactionDropdown = instance.$('.reactions-dropdown');
     const reaction = $(clicked).text().trim();
-    const reactInput = instance.$('#add-reaction');
+    const reactInput = instance.$('input');
     $(reactInput).val(reaction);
     $(reactInput).focus();
     instance.$('.help').addClass('active');
@@ -124,8 +122,13 @@ Template.secret.events({
   },
 
   'keydown #add-reaction': (event, instance) => {
-    const reactInput = instance.$('#add-reaction');
+    const reactInput = instance.$('input');
     const reaction = $(reactInput).val();
+
+    if (reaction.length === 0) {
+      $(reactInput).removeClass('shake');
+    }
+
     if (event.keyCode === 13) {
       Meteor.call('addComment',
         { postId: instance.data._id, body: reaction },
