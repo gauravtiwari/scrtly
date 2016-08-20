@@ -14,12 +14,20 @@ import './seeds.js';
 
 if(Meteor.isServer) {
   Meteor.methods({
-    addComment: (response) => {
-      const comment = {
+    addComment: (comment) => {
+      const commentObj = {
         ip: DDP._CurrentInvocation.get().connection.clientAddress,
         ...response,
       };
-      return Comments.insert(comment);
+      return Comments.insert(commentObj);
+    },
+
+    addPost: (post) => {
+      const postObj = {
+        ip: DDP._CurrentInvocation.get().connection.clientAddress,
+        ...post,
+      };
+      return Posts.insert(postObj);
     }
   });
 }

@@ -34,6 +34,10 @@ body {
   line-height: 1;
   &.vegas-container {
     padding: 0;
+
+    &.dialog-open {
+      overflow: hidden;
+    }
   }
 }
 div {

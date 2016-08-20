@@ -18,7 +18,6 @@ Template.slogan.events({
       instance.$('share-modal'),
       instance.$('share-response'),
     ]);
-
     instance.dialog.toggle('share-modal');
   },
 });
