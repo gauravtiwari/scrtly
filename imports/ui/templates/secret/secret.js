@@ -97,6 +97,12 @@ Template.secret.helpers({
 });
 
 Template.secret.events({
+  'click #subscribe': (event) => {
+    event.preventDefault();
+    console.log($('#dropdown'));
+    $('#dropdown').toggleClass('active');
+  },
+
   'click .comment-number': (event, instance) => {
     const clicked = instance.$(event.target);
     const comments = instance.$('.comment-section');

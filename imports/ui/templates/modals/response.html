@@ -1,9 +1,9 @@
 <template name="responseDialog">
-  <dialog class="modal-response" id="share-response">
+  <dialog class="modal-response modalStyle big-link" id="share-response">
     <div class="up-peace">
       <h1>Thanks for sharing.</h1>
       <h2>YOUR SECRET NOW LIVES HERE</h2>
-      <h3><p>http://some-url</p><a id="copy-text" href="#">COPY</a></h3>
+      <h3><p id="url">http://some-url</p><a id="copy-text" data-clipboard-target="#url" href="#">COPY</a></h3>
       <p>...and is in the cue for inclusion on the home screen</p>
     </div>
     <div class="down-peace">

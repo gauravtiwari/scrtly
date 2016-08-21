@@ -1,9 +1,12 @@
 import './share.html';
+import './response.js';
+
 import { $ } from 'meteor/jquery';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import Dialog from '../../utils/dialog.js';
+// import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.shareDialog.onCreated(function shareDialogOnCreated() {
   this.dialog = new Dialog;
@@ -49,7 +52,7 @@ Template.shareDialog.events({
     const body = characters.substring(0, 200);
 
     Meteor.call('addPost',
-      { body: body },
+      { body },
       (error, result) => {
         if (error) {
           $(instance.$(event.target)).addClass('shake');
@@ -57,6 +60,8 @@ Template.shareDialog.events({
         if (result) {
           instance.$('#comments').val('');
           instance.dialog.close('share-modal');
+          instance.dialog.toggle('share-response');
+          // FlowRouter.go(`/secrets/${result}`);
         }
       }
     );

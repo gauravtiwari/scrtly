@@ -1217,17 +1217,9 @@ section.secret-content.static {
   opacity: 0;
 }
 .modal-response {
-  position: absolute;
   width: 660px;
-  left: 50%;
-  margin-left: -330px;
-  top: -60%;
-  margin-top: -190px;
   z-index: 999;
   transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
 }
 .up-peace {
   margin-bottom: 10px;
@@ -1290,7 +1282,7 @@ section.secret-content.static {
   ul {
     li {
       float: left;
-      margin-right: 25px;
+      margin-right: 20px;
       border: 1px solid #000;
       a {
         display: inline-block;
