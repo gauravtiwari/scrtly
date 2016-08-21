@@ -13,6 +13,7 @@
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
+    "clipboard": "^1.5.12",
     "dialog-polyfill": "^0.4.3",
     "invariant": "^2.2.1",
     "iscroll": "^5.2.0",
