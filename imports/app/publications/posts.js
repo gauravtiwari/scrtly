@@ -17,3 +17,8 @@ Meteor.publish('posts', (limit) => {
     latestPost(limit).options
   );
 });
+
+Meteor.publish('post', (id) => {
+  check(id, Match.Any);
+  return Posts.find({ _id: id });
+});
