@@ -17,7 +17,8 @@ if(Meteor.isServer) {
     addComment: (comment) => {
       const commentObj = {
         ip: DDP._CurrentInvocation.get().connection.clientAddress,
-        ...response,
+        ...comment,
+        createdAt: new Date(),
       };
       return Comments.insert(commentObj);
     },
@@ -26,6 +27,7 @@ if(Meteor.isServer) {
       const postObj = {
         ip: DDP._CurrentInvocation.get().connection.clientAddress,
         ...post,
+        createdAt: new Date(),
       };
       return Posts.insert(postObj);
     }
