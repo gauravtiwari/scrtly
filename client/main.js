@@ -3,6 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 import '../imports/ui/layouts/app-container.js';
 import '../imports/ui/pages/secret-list.js';
+import '../imports/ui/pages/secret-show.js';
 
 import $ from 'jquery';
 import 'vegas';
@@ -28,5 +29,12 @@ FlowRouter.route('/', {
   name: 'App.home',
   action() {
     BlazeLayout.render('appContainer', { main: 'secretList' });
+  },
+});
+
+FlowRouter.route('/secrets/:_id', {
+  name: 'App.show',
+  action(_params) {
+    BlazeLayout.render('appContainer', { main: 'secretShow' });
   },
 });
