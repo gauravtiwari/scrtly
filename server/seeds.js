@@ -31,13 +31,14 @@ Meteor.methods({
 
     _.forEach(Secrets, (post) => {
       let ipIndex = 0;
-      Posts.insert({ body: post.secret.body, ip: '127.0.0.1' }, (_error, result) => {
+      Posts.insert({ body: post.secret.body, ip: '127.0.0.1', createdAt: new Date() }, (_error, result) => {
         _.forEach(post.secret.comments, (comment) => {
           ipIndex = ipIndex + 1;
           const Comment = {
             postId: result,
             ip: `127.0.0.${ipIndex}`,
             body: comment.body,
+            createdAt: new Date(),
           };
           Comments.insert(Comment, () => {
             console.log('Comment added for', result);
