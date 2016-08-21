@@ -20,6 +20,11 @@ Schema.Post = new SimpleSchema({
     type: String,
     label: 'User IP Address',
   },
+  createdAt: {
+    type: Date,
+    label: 'Timestamp',
+    optional: true,
+  },
 });
 
 Schema.Comment = new SimpleSchema({
@@ -33,6 +38,11 @@ Schema.Comment = new SimpleSchema({
   },
   postId: {
     type: String,
+  },
+  createdAt: {
+    type: Date,
+    label: 'Timestamp',
+    optional: true,
   },
 });
 
